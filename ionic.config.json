@@ -1,0 +1,9 @@
+{
+  "name": "cobat-app",
+  "app_id": "",
+  "gulpStartupTasks": [
+     "sass",
+     "lint",
+     "watch"
+   ]
+}

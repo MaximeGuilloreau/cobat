@@ -1,0 +1,24 @@
+<ion-view view-title="Sites">
+  <ion-content class="padding">
+    <h2>Site</h2>
+    <button
+     class="button button-positive"
+     type="button"
+     ui-sref="sites.new" >new Site</button>
+    <ion-list>
+      <ion-item
+        class="item-remove-animate item-avatar item-icon-right"
+        ng-repeat="site in sites"
+        type="item-text-wrap"
+        ui-sref="sites.calendar({siteId: 2, month: month, year: year})"
+        >
+        <h2>{{site.name}}</h2>
+        <i class="i0con ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="">
+          Delete
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

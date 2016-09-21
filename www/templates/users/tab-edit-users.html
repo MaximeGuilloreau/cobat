@@ -1,0 +1,28 @@
+<ion-view view-title="Users">
+  <ion-content class="padding">
+    <h2>Users</h2>
+    <form ng-submit="save(user)" >
+
+        <div class="list">
+          <label class="item item-input">
+            <input
+            type="text"
+            placeholder="First Name"
+            ng-model="user.firstName"
+            >
+          </label>
+          <label class="item item-input">
+            <input
+            type="text"
+            placeholder="Last Name"
+            ngu-model="user.name"
+            >
+          </label>
+        </div>
+
+        <button
+            class="button button-positive"
+            type="submit" >Submit</button>
+    </form>
+  </ion-content>
+</ion-view>

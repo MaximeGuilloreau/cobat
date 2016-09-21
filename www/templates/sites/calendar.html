@@ -1,0 +1,11 @@
+<ion-view view-title="Sites">
+  <ion-content class="padding">
+    <ul class="list">
+        <li  ng-repeat="date in dates" class="item">
+          <a ui-sref="sites.timeclock" >
+            {{date | date }}
+          </a>
+        </li>
+    </ul>
+  </ion-content>
+</ion-view>
