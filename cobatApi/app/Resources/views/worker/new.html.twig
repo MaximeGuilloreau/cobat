@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Worker creation</h1>
+
+    {{ form_start(form) }}
+        <div class="form-group" >
+            {{ form_errors(form.name) }}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name, {attr: { class: "form-control"}}) }}
+        </div>
+
+        <div class="form-group" >
+            {{ form_errors(form.firstName) }}
+            {{ form_label(form.firstName) }}
+            {{ form_widget(form.firstName, {attr: { class: "form-control"}}) }}
+        </div>
+        <button type="button" class="btn btn-success" >Sauvegarde</button>
+        <a class="btn btn-primary" href="{{ path('worker_index') }}">Back to the list</a>
+    {{ form_end(form) }}
+
+{% endblock %}

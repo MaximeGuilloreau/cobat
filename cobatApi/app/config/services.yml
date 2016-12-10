@@ -1,0 +1,33 @@
+imports:
+    - { resource: services/resources.yml }
+
+parameters:
+#    parameter_name: value
+
+services:
+#    get_set_method_normalizer:
+#        class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+#        public: false
+#        tags:
+#            - { name: serializer.normalizer }
+
+    object_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+        public: false
+        tags:
+            - {name: serializer.normalizer}
+
+    cobat.export.builder:
+        class: AppBundle\Export\ExportBuilder
+        arguments:
+            - '@=service("doctrine").getRepository("AppBundle:Time")'
+
+    cobat.export.excel_builder:
+        class: AppBundle\Export\ExcelExport
+        arguments:
+            - '@phpexcel'
+
+    cobat.week.builder:
+        class: AppBundle\Week\WeekBuilder
+        arguments:
+            - '@=service("doctrine").getRepository("AppBundle:Time")'

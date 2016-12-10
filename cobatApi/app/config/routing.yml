@@ -1,0 +1,20 @@
+app_worker:
+    resource: "@AppBundle/Controller/WorkerController.php"
+    type:     annotation
+
+app_site:
+    resource: "@AppBundle/Controller/SiteController.php"
+    type:     annotation
+
+api:
+    resource: "."
+    prefix: "/api"
+    type:     "api"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   "/doc"
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

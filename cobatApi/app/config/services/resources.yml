@@ -1,0 +1,37 @@
+services:
+    resource.site:
+        parent:    "api.resource"
+        arguments: [ 'AppBundle\Entity\Site' ]
+        calls:
+            -   method: "initFilters"
+                arguments: [ [ "@site.search_filter" ] ]
+        tags:      [ { name: "api.resource" } ]
+
+    site.search_filter:
+        parent:    'api.doctrine.orm.search_filter'
+        arguments: [ {workers: exact} ]
+
+    resource.time:
+        parent:    "api.resource"
+        arguments: [ 'AppBundle\Entity\Time' ]
+        tags:      [ { name: "api.resource" } ]
+
+    resource.worker:
+        parent:    "api.resource"
+        arguments: [ 'AppBundle\Entity\Worker' ]
+        tags:      [ { name: "api.resource" } ]
+
+    worker.search_filter:
+        parent: 'api.doctrine.orm.search_filter'
+        arguments: [{}]
+
+    resource.user.item_operation.post_refresh_loyalty_information:
+        class:   Dunglas\ApiBundle\Api\Operation\Operation
+        public:  false
+        factory: [ "@api.operation_factory", "createItemOperation" ]
+        arguments:
+            - "@resource.user"
+            - [ "PUT" ]
+            - "/users/{id}/refresh-loyalty-informations"
+            - "AppBundle:User:refreshLoyaltyInformation"
+            - "api_user_post_refresh_loyalty_information"
