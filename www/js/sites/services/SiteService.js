@@ -1,21 +1,19 @@
 'use strict';
 
-angular.module('cobat').factory('sitesService', function ($q) {
-    var api = {};
+angular.module('cobat').factory('sitesService', function (Restangular, $q) {
+  var api = {};
 
-    api.findAll = function () {
-        return $q.when([
-            {
-                name: "Site 1"
-            } , {
-                name: "Site 2"
-            }
-        ]);
-    };
+  api.findAll = function () {
+    return Restangular.all('sites').getList();
+  };
 
-    api.save = function (site) {
-      return $q.when(site);
-    };
+  api.findById = function (siteId) {
+    return Restangular.one('sites', siteId).get();
+  };
 
-    return api;
+  api.save = function (site) {
+    return $q.when(site);
+  };
+
+  return api;
 });

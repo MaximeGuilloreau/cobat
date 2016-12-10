@@ -1,0 +1,12 @@
+<div class="row" >
+  <div class="col cell" >
+    {{ $ctrl.worker.firstName }} {{ $ctrl.worker.name }}
+  </div>
+  <div class="col cell" ng-repeat="day in $ctrl.week" >
+    <timeclock-day
+      date="day"
+      times="$ctrl.times"
+      worker="$ctrl.worker"
+    ></timeclock-day>
+  </div>
+</div>

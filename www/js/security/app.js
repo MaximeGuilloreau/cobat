@@ -5,11 +5,21 @@ angular.module('cobat').config(function ($stateProvider) {
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl'
+    controller: 'LoginCtrl',
+    data: {
+      isSecured: false
+    }
   });
-}).run(function ($rootScope, $log, SecurityService) {
+}).run(function ($rootScope, $state, SecurityService) {
   $rootScope.$on('$stateChangeStart', function(event, toState) {
-    $log.log('stateChange', toState, SecurityService.getConnectedUser());
-
-	});
+    var isSecured = true;
+    var connectedUser = SecurityService.getConnectedUser();
+    if (toState.data && toState.data.isSecured !== undefined) {
+      isSecured = toState.data.isSecured;
+    }
+		// if (isSecured && !connectedUser) {
+		// 	event.preventDefault();
+		// 	$state.go('login');
+		// }
+  });
 });

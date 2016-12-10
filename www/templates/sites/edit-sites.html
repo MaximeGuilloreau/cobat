@@ -1,8 +1,12 @@
-<ion-view view-title="Users">
+<ion-view view-title="Sites">
+  <ion-nav-buttons side="primary">
+    <button
+      class="button button-icon ion-compose"
+      ng-click="modal.show()">
+    </button>
+    </ion-nav-buttons>
   <ion-content class="padding">
-    <h2>Sites</h2>
     <form ng-submit="saveSite(site)" >
-
         <div class="list">
           <label class="item item-input">
             <input
@@ -14,7 +18,7 @@
 
           <label class="item item-input item-select">
             <div class="input-label">
-              Lightsaber
+              Users
             </div>
             <select multiple>
               <option>Blue</option>

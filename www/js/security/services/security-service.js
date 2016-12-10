@@ -4,11 +4,12 @@ var SecurityService = function () {
   var api = {};
   var connectedUser;
 
+  api.setConnectedUser = function (user) {
+    connectedUser = user;
+    return connectedUser;
+  };
+
   api.getConnectedUser = function () {
-    connectedUser = {
-      name: 'connectedUser',
-      firstName: 'admin'
-    };
     return connectedUser;
   };
 

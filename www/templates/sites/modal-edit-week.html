@@ -1,0 +1,20 @@
+
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Modifier la Semaine</h1>
+    <button class="button button-positive" ng-click="closeModal()" type="button" >Fermer</button>
+  </ion-header-bar>
+  <ion-content>
+    <form class="padding">
+      <div class="list">
+        <label ng-repeat="day in $ctrl.days" class="item item-input item-stacked-label">
+          <span class="input-label">{{ day | day: true }}</span>
+          <input type="number" value="7" >
+        </label>
+      </div>
+      <div class="padding" >
+        <button type="button"  class="button button-positive" >Valider</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

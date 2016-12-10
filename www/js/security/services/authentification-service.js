@@ -5,11 +5,20 @@ var AuthentificationService = function ($q, $log, SecurityService) {
 
   api.login = function (data) {
     $log.log('login information', data);
-    return $q.when({
-      id: 1,
-      name: 'name',
-      firstName: 'firstName'
-    });
+    if (!data.username || !data.password) {
+      return $q.reject();
+    }
+
+    if (data.username !== data.password) {
+      return $q.reject();
+    }
+
+    var user = {
+      name: 'admin',
+      firstName: 'admin'
+    };
+
+    return $q.when(SecurityService.setConnectedUser(user));
   };
 
   api.logout = function () {

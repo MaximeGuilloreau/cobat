@@ -1,21 +1,25 @@
 <ion-view view-title="Users">
   <ion-content class="padding">
-    <h2>Time clock</h2>
+    <h3>Paris de {{ startDate | date:"dd/MM/yyyy" }} à {{endDate | date:"dd/MM/yyyy"}} </h3>
     <form ng-submit="save(times)">
-      <button type="submit" class="button button-positive">Save</button>
-      <ul class="list-item" >
-        <li ng-repeat="user in users" >
-          <label class="item item-input">
-            <span class="item-label" >{{user.name}}  {{user.firstName}}</span>
-            <input
-            type="text"
-            placeholder="{{user.name}}"
-            ng-model="times[user.id].time"
-            >
-          </label>
-        </li>
-      </ul>
-      <button type="submit" class="button button-positive"  >Sav</button>
+      <div class="padding" >
+        <button type="submit" class="button button-calm button-block"  >Valider</button>
+      </div>
+      <div class="list-container" >
+        <timeclock-header
+          week="week">
+        </timeclock-header>
+        <users-timeclock-week
+          ng-repeat="worker in workers"
+          worker="worker"
+          week="week"
+          times="times"
+          >
+        </users-timeclock-week>
+      </div>
+        <div class="padding" >
+          <button type="submit" class="button button-calm button-block"  >Valider</button>
+        </div>
     </form>
   </ion-content>
 </ion-view>
