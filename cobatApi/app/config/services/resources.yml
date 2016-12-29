@@ -3,6 +3,8 @@ services:
         parent:    "api.resource"
         arguments: [ 'AppBundle\Entity\Site' ]
         calls:
+            -   method:    "initNormalizationContext"
+                arguments: [ { groups: [ "site_read" ] } ]
             -   method: "initFilters"
                 arguments: [ [ "@site.search_filter" ] ]
         tags:      [ { name: "api.resource" } ]
@@ -14,24 +16,58 @@ services:
     resource.time:
         parent:    "api.resource"
         arguments: [ 'AppBundle\Entity\Time' ]
+        calls:
+            -   method: "initCollectionOperations"
+                arguments:
+                    -
+                        - "@resource.time.mass_save"
+##                        - "@resource.time.collection_operation.post"
+##                        - "@resource.time.collection_operation.get"
+#
+#            -   method: "initItemOperations"
+#                arguments:
+#                    -
+#                        - '@resource.time.item_operation.delete'
+#                        - '@resource.time.item_operation.get'
+#                        - '@resource.time.item_operation.put'
         tags:      [ { name: "api.resource" } ]
 
     resource.worker:
         parent:    "api.resource"
+        public: false
         arguments: [ 'AppBundle\Entity\Worker' ]
+        calls:
+            -   method:    "initNormalizationContext"
+                arguments: [ { groups: [ "worker_read" ] } ]
+            -   method: "initCollectionOperations"
+                arguments:
+                    -
+                        - '@resource.worker.getWeek'
+
         tags:      [ { name: "api.resource" } ]
 
     worker.search_filter:
         parent: 'api.doctrine.orm.search_filter'
         arguments: [{}]
 
-    resource.user.item_operation.post_refresh_loyalty_information:
+    resource.worker.getWeek:
         class:   Dunglas\ApiBundle\Api\Operation\Operation
         public:  false
         factory: [ "@api.operation_factory", "createItemOperation" ]
         arguments:
-            - "@resource.user"
-            - [ "PUT" ]
-            - "/users/{id}/refresh-loyalty-informations"
-            - "AppBundle:User:refreshLoyaltyInformation"
-            - "api_user_post_refresh_loyalty_information"
+            - "@resource.worker"
+            - [ "GET" ]
+            - "times/week/{siteId}/{startDate}/{endDate}"
+            - "AppBundle:Api/Worker:getWeek"
+            - "cobat_worker_getweek"
+
+    resource.time.mass_save:
+        class:   Dunglas\ApiBundle\Api\Operation\Operation
+        public:  false
+        factory: [ "@api.operation_factory", "createItemOperation" ]
+        arguments:
+            - "@resource.time"
+            - [ "POST" ]
+            - "/times/mass-save"
+            - "AppBundle:Time:massSave"
+            - "cobat_time_mass_save"

@@ -2,7 +2,7 @@
 
 	// from https://github.com/dunglas/DunglasJsonLdApiBundle
 angular.module('cobat').config(function(RestangularProvider) {
-  RestangularProvider.setBaseUrl('http://localhost:8000/api');
+  RestangularProvider.setBaseUrl('http://localhost:1234/api');
     // JSON-LD @id support
 		RestangularProvider.setRestangularFields({
 			id: '@id'
@@ -24,8 +24,9 @@ angular.module('cobat').config(function(RestangularProvider) {
 			populateHref(data);
 
 			if ('getList' === operation) {
+				console.log(data);
 				var jsonMode = !!data['hydra:member'] ? 'hydra:member' : 'data';
-				var collectionResponse = data[jsonMode];
+				var collectionResponse = data[jsonMode] || data ;
 				collectionResponse.metadata = {};
 
 				// Put metadata in a property of the collection

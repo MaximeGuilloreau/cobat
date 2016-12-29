@@ -21,21 +21,21 @@ class Worker
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({Worker::REPORT})
+     * @Groups({Worker::REPORT, "worker_read"})
      */
     private $id;
 
     /**
      * @var  string
      * @ORM\Column(type="string")
-     * @Groups({Worker::REPORT})
+     * @Groups({Worker::REPORT, "worker_read"})
      */
     private $name;
 
     /**
      * @var string
      * @ORM\Column(type="string")
-     * @Groups({Worker::REPORT})
+     * @Groups({Worker::REPORT, "worker_read"})
      */
     private $firstName;
 
@@ -49,7 +49,7 @@ class Worker
     /**
      * @var Time[]
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Time", mappedBy="worker")
-     * @Groups({Worker::REPORT})
+     * @Groups({Worker::REPORT, "worker_read"})
      */
     private $times;
 
@@ -99,7 +99,7 @@ class Worker
         $this->firstName = $firstName;
     }
 
-    public function setTimes($times)
+    public function setTimes(ArrayCollection $times)
     {
         $this->times = $times;
     }
@@ -111,7 +111,7 @@ class Worker
 
     public function getTimes()
     {
-        $this->times;
+        return $this->times;
     }
 }
 

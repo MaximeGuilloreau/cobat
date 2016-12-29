@@ -17,21 +17,21 @@ class Time
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({Worker::REPORT})
+     * @Groups({Worker::REPORT, "worker_read"})
      */
     private $id;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
-     * @Groups({Worker::REPORT})
+     * @Groups({Worker::REPORT, "worker_read"})
      */
     private $date;
 
     /**
      * @var int
      * @ORM\Column(type="integer")
-     * @Groups({Worker::REPORT})
+     * @Groups({Worker::REPORT, "worker_read"})
      */
     private $amountHour;
 

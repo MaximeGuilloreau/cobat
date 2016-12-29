@@ -2,10 +2,13 @@
   <div class="col cell" >
     {{ $ctrl.worker.firstName }} {{ $ctrl.worker.name }}
   </div>
-  <div class="col cell" ng-repeat="day in $ctrl.week" >
+  <pre>
+    {{ $ctrl.times.times }}
+  </pre>
+  <div class="col cell" ng-repeat="day in $ctrl.weekReport" >
     <timeclock-day
       date="day"
-      times="$ctrl.times"
+      times="$ctrl.weekReport"
       worker="$ctrl.worker"
     ></timeclock-day>
   </div>

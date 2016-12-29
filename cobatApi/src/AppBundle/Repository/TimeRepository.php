@@ -18,13 +18,14 @@ class TimeRepository extends EntityRepository
     public function findByIntervale(Site $site,\DateTime $dateStart, \DateTime $dateEnd)
     {
         $qb = $this
-            ->createQueryBuilder('t')
+            ->_em->createQueryBuilder()
+            ->select('t')
+            ->from($this->_entityName, 't')
             ->join('t.worker', 'w')
             ->addSelect('w')
             ->where('t.date >= :dateStart')
             ->andWhere('t.date < :dateEnd')
             ->andWhere('t.site = :site')
-            ->groupBy('w.id')
             ->setParameter('dateStart', $dateStart)
             ->setParameter('dateEnd', $dateEnd)
             ->setParameter('site', $site)

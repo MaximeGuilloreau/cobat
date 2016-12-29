@@ -4,9 +4,9 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Site;
 use AppBundle\Entity\Worker;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -135,25 +135,5 @@ class WorkerController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
-    }
-
-    /**
-     * @Route("/report-time/{siteId}")
-     */
-    public function reportTimeAction(Request $request, $siteId)
-    {
-        $site = $this->getDoctrine()->getRepository(Site::class)->find($siteId);
-        $report = $this->getDoctrine()->getRepository(Worker::class)->reportTime($site);
-
-        foreach($report as $user) {
-            dump($user->getTimes());
-        }
-        dump($this->get('serializer')->normalize($report, null, ['groups' => [Worker::REPORT]]));
-        dump($report);
-
-        die;
-        return new JsonResponse(
-            $this->get('serializer')->normalize($report, null, ['groups' => [Worker::REPORT]])
-        );
     }
 }

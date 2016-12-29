@@ -16,14 +16,8 @@
                 <td><a href="{{ path('site_show', { 'id': site.id }) }}">{{ site.id }}</a></td>
                 <td>{{ site.name }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('site_show', { 'id': site.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('site_edit', { 'id': site.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="btn" href="{{ path('site_show', { 'id': site.id }) }}">show</a>
+                    <a class="btn" href="{{ path('site_edit', { 'id': site.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}
@@ -32,7 +26,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('site_new') }}">Create a new site</a>
+            <a class="btn" href="{{ path('site_new') }}">Create a new site</a>
         </li>
     </ul>
 {% endblock %}

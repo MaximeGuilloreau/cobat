@@ -3,7 +3,9 @@
 namespace AppBundle\Week;
 
 use AppBundle\Entity\Site;
+use AppBundle\Entity\Time;
 use AppBundle\Repository\TimeRepository;
+use AppBundle\Repository\WorkerRepository;
 
 /**
  * Build week
@@ -14,12 +16,16 @@ class WeekBuilder
     /** @var TimeRepository */
     private $timeRepository;
 
+    /** @var WorkerRepository */
+    private $workerRepository;
+
     /**
      * @param TimeRepository $timeRepository
      */
-    public function __construct(TimeRepository $timeRepository)
+    public function __construct(TimeRepository $timeRepository, WorkerRepository $workerRepository)
     {
         $this->timeRepository = $timeRepository;
+        $this->workerRepository = $workerRepository;
     }
 
     /**
@@ -31,9 +37,7 @@ class WeekBuilder
      */
     public function build(Site $site, \DateTime $startDate, \DateTime $endDate)
     {
-        $times = $this->timeRepository->findByIntervale($site, $startDate, $endDate);
-
-        return $times;
+        return $this->workerRepository->reportTime($site, $startDate, $endDate);
     }
 
 }
