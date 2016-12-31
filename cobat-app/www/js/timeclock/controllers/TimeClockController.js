@@ -14,7 +14,7 @@ var normalizeTimes = function (report, siteId) {
           worker: userReport.worker['@id'],
           date: timeReport.day,
           amountHour: timeReport.time.amountHour,
-          id: !!timeReport.time['@id'] ? timeReport.time['@id'] : null
+          '@id': !!timeReport.time['@id'] ? timeReport.time['@id'] : null
         });
     }
   }

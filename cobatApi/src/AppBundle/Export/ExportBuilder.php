@@ -106,7 +106,6 @@ class ExportBuilder
     private function formatTimes($times)
     {
         $data = [];
-
         /** @var Time $time */
         foreach ($times as $time) {
             if (!isset($data[$time->getWorker()->getId()])) {

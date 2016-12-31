@@ -15,7 +15,7 @@ class TimeRepository extends EntityRepository
      * @param \DateTime $dateEnd
      * @return array
      */
-    public function findByIntervale(Site $site,\DateTime $dateStart, \DateTime $dateEnd)
+    public function findByIntervale(\DateTime $dateStart, \DateTime $dateEnd)
     {
         $qb = $this
             ->_em->createQueryBuilder()
@@ -25,10 +25,10 @@ class TimeRepository extends EntityRepository
             ->addSelect('w')
             ->where('t.date >= :dateStart')
             ->andWhere('t.date < :dateEnd')
-            ->andWhere('t.site = :site')
+            //->andWhere('t.site = :site')
             ->setParameter('dateStart', $dateStart)
             ->setParameter('dateEnd', $dateEnd)
-            ->setParameter('site', $site)
+            //->setParameter('site', $site)
             ;
 
         return $qb->getQuery()->getResult();

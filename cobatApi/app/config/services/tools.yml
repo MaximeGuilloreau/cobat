@@ -1,0 +1,3 @@
+services:
+    cobat.idconverter.tools:
+        class: AppBundle\Tools\IdConverter

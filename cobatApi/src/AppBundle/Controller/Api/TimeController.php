@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Api;
 
 use AppBundle\Entity\Site;
 use Dunglas\ApiBundle\Controller\ResourceController;
@@ -26,9 +26,18 @@ class TimeController extends ResourceController
         $objectManager = $this->getDoctrine()->getManager();
         $content = json_decode($request->getContent(), true);
 
-        //TODO: EXTRACT IN ANOTHER CLASS
-        $times = array_map(function ($element) use ($serializer, $entityClass, $denormalizationContext) {
-            dump($element);
+        $times = array_map(function ($element) use ($serializer, $entityClass, $denormalizationContext, $resource) {
+            if (!empty($element['@id'])) {
+                $object = $this->findOrThrowNotFound(
+                    $resource,
+                    $this->get('cobat.idconverter.tools')->removePrefix($element['@id'])
+                );
+                $denormalizationContext['object_to_populate'] = $object;
+            } else {
+                unset($denormalizationContext['object_to_populate']);
+            }
+
+
             return $serializer->denormalize(
                 $element,
                 $entityClass,

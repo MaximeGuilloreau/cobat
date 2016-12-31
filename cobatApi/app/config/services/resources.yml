@@ -20,17 +20,29 @@ services:
             -   method: "initCollectionOperations"
                 arguments:
                     -
-                        - "@resource.time.mass_save"
-##                        - "@resource.time.collection_operation.post"
-##                        - "@resource.time.collection_operation.get"
-#
-#            -   method: "initItemOperations"
-#                arguments:
-#                    -
-#                        - '@resource.time.item_operation.delete'
-#                        - '@resource.time.item_operation.get'
-#                        - '@resource.time.item_operation.put'
+                        - '@resource.time.mass_save'
+                        - '@resource.time.collection_operation.get'
+                        - '@resource.time.collection_operation.post'
+
         tags:      [ { name: "api.resource" } ]
+
+    resource.time.collection_operation.post:
+        class:   Dunglas\ApiBundle\Api\Operation\Operation
+        public:  false
+        factory: [ "@api.operation_factory", "createCollectionOperation" ]
+        arguments:
+            - "@resource.time"
+            - [ "POST" ]
+            - ~
+            - "AppBundle:Api/Time:cpost"
+
+    resource.time.collection_operation.get:
+        class:   Dunglas\ApiBundle\Api\Operation\Operation
+        public:  false
+        factory: [ "@api.operation_factory", "createCollectionOperation" ]
+        arguments:
+            - "@resource.time"
+            - [ "GET" ]
 
     resource.worker:
         parent:    "api.resource"
@@ -42,9 +54,30 @@ services:
             -   method: "initCollectionOperations"
                 arguments:
                     -
+                        - '@resource.worker.collection_operation.get'
+                        - '@resource.worker.collection_operation.post'
                         - '@resource.worker.getWeek'
 
         tags:      [ { name: "api.resource" } ]
+
+    resource.worker.collection_operation.post:
+        class:   Dunglas\ApiBundle\Api\Operation\Operation
+        public:  false
+        factory: [ "@api.operation_factory", "createCollectionOperation" ]
+        arguments:
+            - "@resource.worker"
+            - [ "POST" ]
+            - ~
+            - "AppBundle:Api/Time:cpost"
+
+    resource.worker.collection_operation.get:
+        class:   Dunglas\ApiBundle\Api\Operation\Operation
+        public:  false
+        factory: [ "@api.operation_factory", "createCollectionOperation" ]
+        arguments:
+            - "@resource.worker"
+            - [ "GET" ]
+
 
     worker.search_filter:
         parent: 'api.doctrine.orm.search_filter'
@@ -69,5 +102,5 @@ services:
             - "@resource.time"
             - [ "POST" ]
             - "/times/mass-save"
-            - "AppBundle:Time:massSave"
+            - "AppBundle:Api/Time:massSave"
             - "cobat_time_mass_save"

@@ -25,6 +25,7 @@ class Site
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Groups({"site_read"})
      */
     private $name;
 
