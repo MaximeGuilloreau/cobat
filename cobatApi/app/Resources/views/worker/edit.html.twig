@@ -1,9 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Worker edit</h1>
+    <section class="content-header">
+        {#<ol class="breadcrumb">#}
+            {#<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>#}
+            {#<li class="active">Here</li>#}
+        {#</ol>#}
 
-    {{ form_start(edit_form) }}
+        <h1>
+            Modifier l'ouvrier
+        </h1>
+    </section>
+
+    <section class="content">
+        {{ form_start(edit_form) }}
         <div class="form-group" >
             {{ form_label(edit_form.name) }}
             {{ form_widget(edit_form.name, {attr: { class: "form-control"}}) }}
@@ -19,10 +29,10 @@
         <a class="btn btn-primary" href="{{ path('worker_index') }}">Back to the list</a>
 
 
-    {{ form_end(edit_form) }}
+        {{ form_end(edit_form) }}
 
-    {{ form_start(delete_form) }}
-    <input class="btn btn-danger" type="submit" value="Delete">
-    {{ form_end(delete_form) }}
-
+        {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Delete">
+        {{ form_end(delete_form) }}
+    </section>
 {% endblock %}

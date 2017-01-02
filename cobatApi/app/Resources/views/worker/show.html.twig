@@ -1,10 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Worker</h1>
+    <section class="content-header">
+        {#<ol class="breadcrumb">#}
+            {#<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>#}
+            {#<li class="active">Here</li>#}
+        {#</ol>#}
 
-    <table>
-        <tbody>
+        <h1>
+            Ouvrier
+        </h1>
+    </section>
+
+    <section class="content">
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ worker.id }}</td>
@@ -17,20 +27,21 @@
                 <th>Firstname</th>
                 <td>{{ worker.firstName }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('worker_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('worker_edit', { 'id': worker.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <ul>
+            <li>
+                <a href="{{ path('worker_index') }}">Retour à la liste</a>
+            </li>
+            <li>
+                <a href="{{ path('worker_edit', { 'id': worker.id }) }}">Modifier</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </section>
 {% endblock %}

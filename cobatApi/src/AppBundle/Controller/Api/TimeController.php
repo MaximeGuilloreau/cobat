@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @Route()
+ * TODO: define controller as a service
  */
 class TimeController extends ResourceController
 {

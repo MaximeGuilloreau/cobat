@@ -14,6 +14,7 @@ class WorkerRepository extends EntityRepository
 {
     /**
      * @return array
+     * @deprecated
      */
     public function findBySite()
     {

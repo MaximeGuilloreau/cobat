@@ -1,9 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Worker creation</h1>
+    <section class="content-header">
+        {#<ol class="breadcrumb">#}
+            {#<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>#}
+            {#<li class="active">Here</li>#}
+        {#</ol>#}
 
-    {{ form_start(form) }}
+        <h1>
+            Créer un nouvelle ouvrier
+        </h1>
+    </section>
+
+    <section class="content">
+        {{ form_start(form) }}
         <div class="form-group" >
             {{ form_errors(form.name) }}
             {{ form_label(form.name) }}
@@ -16,7 +26,7 @@
             {{ form_widget(form.firstName, {attr: { class: "form-control"}}) }}
         </div>
         <button type="button" class="btn btn-success" >Sauvegarde</button>
-        <a class="btn btn-primary" href="{{ path('worker_index') }}">Back to the list</a>
-    {{ form_end(form) }}
-
+        <a class="btn btn-primary" href="{{ path('worker_index') }}">Retour à la liste</a>
+        {{ form_end(form) }}
+    </section>
 {% endblock %}

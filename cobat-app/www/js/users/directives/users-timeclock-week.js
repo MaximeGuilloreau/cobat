@@ -18,7 +18,7 @@ angular.module('cobat').component('usersTimeclockWeek', {
   controller: function () {
     var ctrl = this;
     var weekReport = formatWeek(ctrl.week);
-
+    console.log('ctrl', ctrl);
     for(var i = 0, l = ctrl.worker.times.length; i < l; i++) {
       var time = ctrl.worker.times[i];
       weekReport[(new Date(time.date)).toDateString()].time = time;

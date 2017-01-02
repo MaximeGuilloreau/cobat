@@ -25,10 +25,8 @@ class TimeRepository extends EntityRepository
             ->addSelect('w')
             ->where('t.date >= :dateStart')
             ->andWhere('t.date < :dateEnd')
-            //->andWhere('t.site = :site')
             ->setParameter('dateStart', $dateStart)
             ->setParameter('dateEnd', $dateEnd)
-            //->setParameter('site', $site)
             ;
 
         return $qb->getQuery()->getResult();

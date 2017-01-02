@@ -22,8 +22,8 @@ angular.module('cobat').filter('day', function () {
   ];
   return function (input, full) {
     if (full) {
-      return fullDays[input];
+      return fullDays[input - 1];
     }
-    return days[input];
+    return days[input - 1];
   };
 });

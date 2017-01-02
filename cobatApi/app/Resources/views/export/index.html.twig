@@ -1,13 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Listes des exports</h1>
+    <section class="content-header">
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
+        </ol>
 
-    <ul>
-        <li>
-            <a class="btn" href="{{ path('cobat_download_last_report') }}" >
-                Telecharger le denière rapport
-            </a>
-        </li>
-    </ul>
+        <h1>
+            Listes des exports
+            <small>Optional description</small>
+        </h1>
+    </section>
+
+    <section class="content">
+        <ul>
+            <li>
+                <a class="btn" href="{{ path('cobat_download_last_report') }}" >
+                    Telecharger le denière rapport
+                </a>
+            </li>
+        </ul>
+    </section>
 {% endblock %}
