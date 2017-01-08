@@ -32,8 +32,8 @@ class ExcelExport
         $maxColumns = count($header);
         $row = 1;
         $sheet->mergeCellsByColumnAndRow(0, $row, $maxColumns, $row);
-        $sheet->setCellValueByColumnAndRow(0, 1, $title);
-
+        $cell = $sheet->setCellValueByColumnAndRow(0, 1, $title, true);
+        $this->addStyleToCell($cell, $phpExcelObject);
         //$sheet->mergeCellsByColumnAndRow(0, 2, $maxColumns, 3);
 
         $row = 2;
@@ -41,13 +41,17 @@ class ExcelExport
         foreach ($header as $value) {
             if ($columns < 3) {
                 $sheet->mergeCellsByColumnAndRow($columns, $row, $columns, $row + 1);
-                $sheet
-                    ->setCellValueByColumnAndRow($columns, $row, $value);
+                $cell = $sheet->setCellValueByColumnAndRow($columns, $row, $value, true);
+                $this->addStyleToCell($cell, $phpExcelObject);
+
             } else {
-                $sheet
-                    ->setCellValueByColumnAndRow($columns, $row, self::$days[$value->format('N') - 1]);
-                $sheet
-                    ->setCellValueByColumnAndRow($columns, $row + 1, $value->format('d'));
+                $cell = $sheet
+                    ->setCellValueByColumnAndRow($columns, $row, self::$days[$value->format('N') - 1], true);
+                $this->addStyleToCell($cell, $phpExcelObject);
+                $cell = $sheet
+                    ->setCellValueByColumnAndRow($columns, $row + 1, $value->format('d'), true);
+                $this->addStyleToCell($cell, $phpExcelObject);
+
             }
 
 
@@ -77,6 +81,17 @@ class ExcelExport
 
                     );
                 }
+
+                $phpExcelObject->getActiveSheet()->getStyle($cell->getCoordinate())->applyFromArray(
+                    array(
+                        'borders' => array(
+                            'allborders' => array(
+                                'style' => \PHPExcel_Style_Border::BORDER_THIN
+                            )
+                        )
+                    )
+
+                );
             }
 
             $sheet
@@ -85,14 +100,14 @@ class ExcelExport
             $row++;
         }
 
-        $styleArray = array(
-            'borders' => array(
-                'allborders' => array(
-                    'style' => \PHPExcel_Style_Border::BORDER_THIN
-                )
-            )
-        );
-        $phpExcelObject->getDefaultStyle()->applyFromArray($styleArray);
+//        $styleArray = array(
+//            'borders' => array(
+//                'allborders' => array(
+//                    'style' => \PHPExcel_Style_Border::BORDER_THIN
+//                )
+//            )
+//        );
+//        $phpExcelObject->getDefaultStyle()->applyFromArray($styleArray);
         $phpExcelObject->getActiveSheet()->setTitle('Simple');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $phpExcelObject->setActiveSheetIndex(0);
@@ -122,7 +137,7 @@ class ExcelExport
         // adding headers
         $dispositionHeader = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'stream-file.xls'
+            'rapport.xls'
         );
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
         $response->headers->set('Pragma', 'public');
@@ -130,5 +145,19 @@ class ExcelExport
         $response->headers->set('Content-Disposition', $dispositionHeader);
 
         return $response;
+    }
+
+    private function addStyleToCell(\PHPExcel_Cell $cell, $phpExcelObject)
+    {
+        $phpExcelObject->getActiveSheet()->getStyle($cell->getCoordinate())->applyFromArray(
+            array(
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => \PHPExcel_Style_Border::BORDER_THIN
+                    )
+                )
+            )
+
+        );
     }
 }
