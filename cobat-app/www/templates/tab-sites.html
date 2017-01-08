@@ -1,28 +1,14 @@
 <ion-view view-title="Chantier">
-  <!-- <ion-nav-buttons side="primary">
-    <button
-      type="button"
-      class="button button-positive"
-      ui-sref="sites.new">
-      Ajouter un Chantier
-    </button>
-    </ion-nav-buttons> -->
   <ion-content class="padding">
-    <h2>Chantier</h2>
+    <h2 align="center">Choisisser votre chantier </h2>
     <ion-list>
       <ion-item
         class="item-remove-animate"
         ng-repeat="site in sites"
         type="item-text-wrap"
-        ui-sref="sites.calendar({siteId: 2, month: month, year: year})"
+        ui-sref="sites.calendar({siteId: site.id, month: month, year: year})"
         >
         <h2>{{site.name}}</h2>
-        <!-- <ion-option-button class="button-info" ui-sref="sites.edit({siteId: site.id})">
-          Modifier
-        </ion-option-button>
-        <ion-option-button class="button-assertive" ng-click="">
-          Supprimer
-        </ion-option-button> -->
       </ion-item>
     </ion-list>
   </ion-content>

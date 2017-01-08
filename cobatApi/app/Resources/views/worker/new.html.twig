@@ -13,20 +13,24 @@
     </section>
 
     <section class="content">
-        {{ form_start(form) }}
-        <div class="form-group" >
-            {{ form_errors(form.name) }}
-            {{ form_label(form.name) }}
-            {{ form_widget(form.name, {attr: { class: "form-control"}}) }}
-        </div>
+        <div class="box" >
+            <div class="box-body" >
+                {{ form_start(form) }}
+                <div class="form-group" >
+                    {{ form_errors(form.name) }}
+                    {{ form_label(form.name, 'worker.lastname.label' | trans) }}
+                    {{ form_widget(form.name, {attr: { class: "form-control"}}) }}
+                </div>
 
-        <div class="form-group" >
-            {{ form_errors(form.firstName) }}
-            {{ form_label(form.firstName) }}
-            {{ form_widget(form.firstName, {attr: { class: "form-control"}}) }}
+                <div class="form-group" >
+                    {{ form_errors(form.firstName) }}
+                    {{ form_label(form.firstName, 'worker.firstname.label' | trans) }}
+                    {{ form_widget(form.firstName, {attr: { class: "form-control"}}) }}
+                </div>
+                <button type="submit" class="btn btn-success" >{{ 'save.label' | trans }}</button>
+                <a class="btn btn-primary" href="{{ path('worker_index') }}">{{ 'back_to_list.label' | trans }}</a>
+                {{ form_end(form) }}
+            </div>
         </div>
-        <button type="submit" class="btn btn-success" >Sauvegarde</button>
-        <a class="btn btn-primary" href="{{ path('worker_index') }}">Retour à la liste</a>
-        {{ form_end(form) }}
     </section>
 {% endblock %}

@@ -1,9 +1,17 @@
-<ion-view view-title="Sites">
+<ion-view
+view-title="Chantier"
+on-swipe-left="onSwipeLeft()"
+on-swipe-right="onSwipeRight()"
+>
   <ion-content class="padding" scroll="false">
-    <ul class="list">
-        <li  ng-repeat="week in dates" class="item">
-          <week-calendar week="week" site-id="siteId" ></week-calendar>
-        </li>
-    </ul>
+    <h2 align="center" >Semaine du mois de {{ ::(date | date: 'MMMM') }}</h2>
+    <ion-list>
+      <week-calendar
+        ng-repeat="week in dates track by $index"
+        week="week"
+        site-id="siteId"
+
+      ></week-calendar>
+    </ion-list>
   </ion-content>
 </ion-view>

@@ -1,29 +1,43 @@
 /* global angular */
 'use strict';
 
-var CalendarController = function ($log, $scope, $stateParams) {
+var CalendarController = function (
+  $log,
+  $scope,
+  $stateParams,
+  $state,
+  CalendarService
+) {
+
+  var month = parseInt($stateParams.month, 10);
+  var year = parseInt($stateParams.year, 10);
+  var date = new Date(year, month, 1);
+
   $scope.dates = [];
   $scope.i = 0;
   $scope.siteId = $stateParams.siteId;
-  var month = parseInt($stateParams.month);
-  var year = parseInt($stateParams.year);
-  var date = new Date(year, month, 1);
-
   $scope.date = date;
-  var day;
-  var week = [];
-  while (date.getMonth() === month) {
-    day = date.getDay();
-    if (day === 0) {
-      $scope.dates.push(week);
-      week = [];
-    }
+  $scope.dates = CalendarService.buildWeekList(date);
 
-    week.push(angular.copy(date));
-    date.setDate(date.getDate() + 1);
-  }
+  $scope.onSwipeLeft = function () {
+    var newDate = angular.copy(date);
+    newDate.setMonth(date.getMonth() + 1);
+    $state.go('sites.calendar', {
+      siteId: $scope.siteId,
+      year: newDate.getFullYear(),
+      month: newDate.getMonth()
+    });
+  };
 
-  $scope.dates.push(week);
+  $scope.onSwipeRight = function () {
+    var newDate = angular.copy(date);
+    newDate.setMonth(date.getMonth() - 1);
+    $state.go('sites.calendar', {
+      siteId: $scope.siteId,
+      year: newDate.getFullYear(),
+      month: newDate.getMonth()
+    });
+  };
 };
 
 angular.module('cobat').controller('CalendarCtrl', CalendarController);

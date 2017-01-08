@@ -5,7 +5,7 @@ var SitesListController = function ($scope, sitesService) {
   $scope.year = now.getFullYear();
 
   sitesService.findAll().then(function (sites) {
-      $scope.sites = sites;
+    $scope.sites = sites;
   });
 };
 

@@ -1,0 +1,40 @@
+worker:
+    create:
+        title: Création d'un ouvrier
+    edit:
+        label: Modification de l'ouvier
+    firstname:
+        label: Prénom
+    lastname:
+        label: Nom
+
+site:
+    list:
+        label: Liste des chantiers
+    create:
+        label: Création d'un chantier
+    edit:
+        label: Modification d'un chantier
+    name:
+        label: Nom
+    workers:
+        label: Ouvriers
+
+save:
+    label: Sauvegarde
+back_to_list:
+    label: Retour à la liste
+
+actions:
+    label: Actions
+
+show:
+    label: Voir
+edit:
+    label: Modifier
+
+delete:
+    label: Supprimer
+
+download_application:
+    label: Télécharger l'application

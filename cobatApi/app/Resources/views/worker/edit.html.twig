@@ -8,31 +8,36 @@
         {#</ol>#}
 
         <h1>
-            Modifier l'ouvrier
+            {{ 'worker.edit.label' | trans }}
         </h1>
     </section>
 
     <section class="content">
-        {{ form_start(edit_form) }}
-        <div class="form-group" >
-            {{ form_label(edit_form.name) }}
-            {{ form_widget(edit_form.name, {attr: { class: "form-control"}}) }}
+        <div class="box" >
+            <div class="box-body" >
+                {{ form_start(edit_form) }}
+                <div class="form-group" >
+                    {{ form_label(edit_form.name, 'worker.lastname.label' | trans) }}
+                    {{ form_widget(edit_form.name, {attr: { class: "form-control"}}) }}
+                </div>
+                <div class="form-group" >
+                    {{ form_label(edit_form.firstName, 'worker.firstname.label' | trans ) }}
+                    {{ form_widget(edit_form.firstName, {attr: { class: "form-control"}}) }}
+                </div>
+                <button type="submit" class="btn btn-success" >
+                    {{ 'save.label' | trans }}
+                </button>
+
+                <a class="btn btn-primary" href="{{ path('worker_index') }}">
+                    {{ 'back_to_list.label' | trans }}
+                </a>
+
+                {{ form_end(edit_form) }}
+
+                {{ form_start(delete_form) }}
+                <input class="btn btn-danger" type="submit" value="{{ 'delete.label' | trans }}">
+                {{ form_end(delete_form) }}
+            </div>
         </div>
-        <div class="form-group" >
-            {{ form_label(edit_form.firstName) }}
-            {{ form_widget(edit_form.firstName, {attr: { class: "form-control"}}) }}
-        </div>
-        <button type="submit" class="btn btn-success" >
-            Sauvegarder
-        </button>
-
-        <a class="btn btn-primary" href="{{ path('worker_index') }}">Back to the list</a>
-
-
-        {{ form_end(edit_form) }}
-
-        {{ form_start(delete_form) }}
-        <input class="btn btn-danger" type="submit" value="Delete">
-        {{ form_end(delete_form) }}
     </section>
 {% endblock %}
