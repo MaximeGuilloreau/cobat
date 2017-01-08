@@ -72,3 +72,24 @@ gulp.task('lint', () => {
 gulp.task('default', ['lint'], function () {
     // This will only run if the lint task is successful...
 });
+
+gulp.task('replace', function () {
+  // Get the environment from the command line
+  var env = args.env || 'dev';
+
+  // Read the settings from the right file
+  var filename = env + '.json';
+  var settings = JSON.parse(fs.readFileSync('./config/' + filename, 'utf8'));
+  console.log(settings);
+// Replace each placeholder with the correct value for the variable.
+gulp.src('www/js/constant/constants.js.replace')
+  .pipe(replace({
+    patterns: [
+      {
+        match: 'apiUrl',
+        replacement: settings.apiUrl
+      }
+    ]
+  }))
+  .pipe(gulp.dest('www/js/constant/constants.js'));
+});

@@ -8,7 +8,7 @@
         {#</ol>#}
 
         <h1>
-            Créer un nouvelle ouvrier
+            {{ 'worker.create.title' | trans }}
         </h1>
     </section>
 
@@ -25,7 +25,7 @@
             {{ form_label(form.firstName) }}
             {{ form_widget(form.firstName, {attr: { class: "form-control"}}) }}
         </div>
-        <button type="button" class="btn btn-success" >Sauvegarde</button>
+        <button type="submit" class="btn btn-success" >Sauvegarde</button>
         <a class="btn btn-primary" href="{{ path('worker_index') }}">Retour à la liste</a>
         {{ form_end(form) }}
     </section>

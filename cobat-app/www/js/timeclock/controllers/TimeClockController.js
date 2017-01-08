@@ -21,9 +21,9 @@ var normalizeTimes = function (report, siteId) {
   return times;
 };
 
-var TimeClockController = function ($scope, $stateParams, workersService, timeclockService) {
+var TimeClockController = function ($scope, $stateParams, workersService, timeclockService, cobatConfig) {
   var siteId = $stateParams.siteId;
-
+console.log('cobatConfig', cobatConfig);
   $scope.workers = [];
   $scope.times = [];
   $scope.startDate = new Date($stateParams.startDate);
