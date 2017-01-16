@@ -46,7 +46,7 @@ class User implements UserInterface
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user_write", "user_read"})
+     * @Groups({"user_write"})
      */
     protected $salt;
 

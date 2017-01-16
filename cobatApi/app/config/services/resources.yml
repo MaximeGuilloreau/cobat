@@ -104,3 +104,14 @@ services:
             - "/times/mass-save"
             - "AppBundle:Api/Time:massSave"
             - "cobat_time_mass_save"
+
+    resource.user:
+        parent: api.resource
+        arguments: [ 'AppBundle\Entity\User' ]
+        public: false
+        calls:
+            -   method:    "initNormalizationContext"
+                arguments: [ { groups: [ "user_read" ] } ]
+        tags:
+            - {name: 'api.resource'}
+

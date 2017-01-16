@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Nelmio\CorsBundle\NelmioCorsBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
             new AppBundle\AppBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
