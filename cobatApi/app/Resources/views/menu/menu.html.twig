@@ -3,6 +3,18 @@
         <ul class="sidebar-menu">
             <li class="header">Menu</li>
             <li class="treeview">
+                <a href="{{ path('user_index') }}">
+                    <i class="fa fa-link"></i> <span>Chef de chantier</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ path('user_index') }}">Voir tous</a></li>
+                    <li><a href="{{ path('user_new') }}">Nouveau</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
                 <a href="{{ path('site_index') }}">
                     <i class="fa fa-link"></i> <span>Chantier</span>
                     <span class="pull-right-container">
@@ -16,7 +28,7 @@
             </li>
             <li class="treeview">
                 <a href="{{ path('worker_index') }}">
-                    <i class="fa fa-link"></i> <span>Ouvrier</span>
+                    <i class="fa fa-link"></i> <span>Employés</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>

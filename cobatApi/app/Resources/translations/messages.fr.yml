@@ -1,12 +1,20 @@
 worker:
     create:
-        title: Création d'un ouvrier
+        title: Création d'un employé
     edit:
-        label: Modification de l'ouvier
+        label: Modification de l'employé
     firstname:
         label: Prénom
     lastname:
         label: Nom
+
+user:
+    create:
+        label: Créer un chef de chantier
+    edit:
+        label: Modifier un chef de chantier
+    list:
+        label: Liste des chefs de chantier
 
 site:
     list:
@@ -19,6 +27,8 @@ site:
         label: Nom
     workers:
         label: Ouvriers
+    user:
+        label: Chef de chantier
 
 save:
     label: Sauvegarde

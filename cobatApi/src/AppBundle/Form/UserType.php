@@ -2,13 +2,14 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Worker;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SiteType extends AbstractType
+/**
+ * Class UserType
+ */
+class UserType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -16,13 +17,9 @@ class SiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('user')
-            ->add('workers', EntityType::class, [
-                'class' => 'AppBundle\Entity\Worker',
-                'choice_label' => 'name',
-                'multiple' => true,
-            ]);
+            ->add('email')
+            ->add('username')
+            ->add('password');
     }
 
     /**
@@ -30,9 +27,9 @@ class SiteType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Site'
-        ));
+        $resolver->setDefaults([
+            'data_class' => 'AppBundle\Entity\User',
+        ]);
     }
 
     /**
@@ -40,7 +37,7 @@ class SiteType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_site';
+        return 'appbundle_user';
     }
 
 

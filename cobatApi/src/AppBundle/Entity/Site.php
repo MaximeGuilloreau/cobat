@@ -42,6 +42,14 @@ class Site
     private $workers;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * Site constructor.
      */
     public function __construct()
@@ -103,5 +111,21 @@ class Site
     public function addWorker(Worker $worker)
     {
         $this->workers[] = $worker;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     */
+    public function setUser(User $user = null)
+    {
+        $this->user = $user;
     }
 }
