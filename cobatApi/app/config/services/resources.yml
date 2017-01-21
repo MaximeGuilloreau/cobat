@@ -11,7 +11,7 @@ services:
 
     site.search_filter:
         parent:    'api.doctrine.orm.search_filter'
-        arguments: [ {workers: exact} ]
+        arguments: [ {workers: exact, user: exact} ]
 
     resource.time:
         parent:    "api.resource"

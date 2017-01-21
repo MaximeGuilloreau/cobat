@@ -40,17 +40,21 @@ services:
             - '@=service("doctrine").getRepository("AppBundle:Time")'
             - '@=service("doctrine").getRepository("AppBundle:Worker")'
 
-#    cobat.worker.normalizer:
-#        class: AppBundle\Normalizer\WorkerNormalizer
-#        tags:
-#            - { name: serializer.normalizer }
-#
-#    cobat.time.normalizer:
-#        class: AppBundle\Normalizer\TimeNormalizer
-#        tags:
-#            - { name: serializer.normalizer }
+    cobat.authorisation.jwt_login_authenticator:
+        class: AppBundle\Security\JwtLoginAuthenticator
+        arguments:
+            - '@lexik_jwt_authentication.jwt_manager'
 
-#    cobat.collection.normalizer:
-#        class: AppBundle\Normalizer\ArrayNormalizer
-#        tags:
-#            - { name: serializer.normalizer, priority: 255 }
+    cobat.authorisation.jwt_authenticator:
+        class: AppBundle\Security\JwtAuthenticator
+        arguments:
+            - '@cobat.security.user_factory'
+            - '@lexik_jwt_authentication.extractor.authorization_header_extractor'
+    cobat.security.user_factory:
+        class: AppBundle\Security\UserFactory
+        arguments:
+            - '@lexik_jwt_authentication.encoder.default'
+    cobat.security.user_provider:
+        class: AppBundle\Security\UserProvider
+        arguments:
+            - '@=service("doctrine").getRepository("AppBundle:User")'
