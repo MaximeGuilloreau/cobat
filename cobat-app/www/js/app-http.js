@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('cobat').config(function(RestangularProvider) {
-  // RestangularProvider.setBaseUrl('http://localhost:1234/api');
-  RestangularProvider.setBaseUrl('http://vps357341.ovh.net/api');
+  RestangularProvider.setBaseUrl('http://localhost:1234/api');
+  // RestangularProvider.setBaseUrl('http://vps357341.ovh.net/api');
 
   RestangularProvider.setRestangularFields({
     id: '@id'

@@ -17,10 +17,14 @@ class SiteType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('user')
+            ->add('user', EntityType::class, [
+                'class' => 'AppBundle\Entity\User',
+                'choice_label' => 'username',
+            ])
             ->add('workers', EntityType::class, [
                 'class' => 'AppBundle\Entity\Worker',
                 'choice_label' => 'name',
+                'choice_name'=> 'name',
                 'multiple' => true,
             ]);
     }

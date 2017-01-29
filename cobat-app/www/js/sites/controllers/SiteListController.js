@@ -1,10 +1,14 @@
 
-var SitesListController = function ($scope, sitesService) {
+var SitesListController = function ($scope, sitesService, ContextService) {
   var now = new Date();
+  var user = ContextService.getConnectedUser();
+  console.log('user', user);
   $scope.month = now.getMonth();
   $scope.year = now.getFullYear();
-
-  sitesService.findAll().then(function (sites) {
+  var queryParams = {
+    userId: user.id
+  };
+  sitesService.findAll(queryParams).then(function (sites) {
     $scope.sites = sites;
   });
 };

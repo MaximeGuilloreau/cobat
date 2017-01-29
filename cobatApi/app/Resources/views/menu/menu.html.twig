@@ -1,10 +1,22 @@
 <aside class="main-sidebar">
     <section class="sidebar">
         <ul class="sidebar-menu">
-            <li class="header">Menu</li>
+            <li class="header">Ressource</li>
+            <li class="treeview">
+                <a href="{{ path('worker_index') }}">
+                    <i class="fa fa-link"></i> <span>Employés</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ path('worker_index') }}">Voir tous</a></li>
+                    <li><a href="{{ path('worker_new') }}">Nouveau</a></li>
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="{{ path('user_index') }}">
-                    <i class="fa fa-link"></i> <span>Chef de chantier</span>
+                    <i class="fa fa-link"></i> <span>Gestionnaire des chantier</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -26,18 +38,7 @@
                     <li><a href="{{ path('site_new') }}">Nouveau</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="{{ path('worker_index') }}">
-                    <i class="fa fa-link"></i> <span>Employés</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{ path('worker_index') }}">Voir tous</a></li>
-                    <li><a href="{{ path('worker_new') }}">Nouveau</a></li>
-                </ul>
-            </li>
+            <li class="header">Suivi du personnel</li>
             <li>
                 <a href="{{ path('export_index') }}"><i class="fa fa-link"></i> <span>Rapport</span></a>
             </li>

@@ -2,9 +2,8 @@
 # http://symfony.com/doc/current/book/security.html
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User:
-            algorithm: bcrypt
-            cost: 12
+        Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle\Entity\User: plaintext
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
@@ -12,15 +11,18 @@ security:
     providers:
         cobat_user_provider:
             id: cobat.security.user_provider
-#        in_memory:
-#            memory:
-#                users:
-#                    user:
-#                        password: user
-#                        roles: 'ROLE_USER'
-#                    admin:
-#                        password: admin
-#                        roles: 'ROLE_ADMIN'
+        in_memory:
+            memory:
+                users:
+                    user:
+                        password: user
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: admin
+                        roles: 'ROLE_ADMIN'
+                    Cobatlistadmin:
+                        password:
+                        roles: 'ROLE_ADMIN'
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -45,6 +47,7 @@ security:
         default:
             anonymous: ~
             http_basic: ~
+            provider: in_memory
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: ^/api/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }

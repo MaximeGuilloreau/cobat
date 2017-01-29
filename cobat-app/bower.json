@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "angular-i18n": "^1.6.1",
-    "angular-jwt": "^0.1.8"
+    "angular-jwt": "^0.1.8",
+    "a0-angular-storage": "^0.0.15"
   }
 }

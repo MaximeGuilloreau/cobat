@@ -17,7 +17,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
  */
 class JwtAuthenticator extends AbstractGuardAuthenticator
 {
-
+    /** @var UserFactory */
     private $userFactory;
 
     public function __construct(UserFactory $userFactory)
@@ -79,8 +79,7 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
         //todo inject extractor
         $extractor = new AuthorizationHeaderTokenExtractor('Bearer', 'Authorization');
 
-        $data = $extractor->extract($request);
-        return $data;
+        return $extractor->extract($request);
     }
 
     /**

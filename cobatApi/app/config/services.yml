@@ -58,3 +58,9 @@ services:
         class: AppBundle\Security\UserProvider
         arguments:
             - '@=service("doctrine").getRepository("AppBundle:User")'
+
+    coabt.event.jwt_created_listener:
+        class: AppBundle\EventListener\JWTCreatedListener
+        arguments: [ '@request_stack' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }

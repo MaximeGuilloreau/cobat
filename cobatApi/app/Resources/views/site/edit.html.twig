@@ -19,13 +19,20 @@
                 {{ form_start(edit_form) }}
                 <div class="form-group" >
                     {{ form_errors(edit_form.name) }}
-                    {{ form_label(edit_form.name) }}
+                    {{ form_label(edit_form.name, 'site.name.label' | trans) }}
                     {{ form_widget(edit_form.name, {attr: {class: "form-control"}}) }}
                 </div>
 
                 <div class="form-group" >
+                    {{ form_errors(edit_form.user) }}
+                    {{ form_label(edit_form.user, 'site.user.label' | trans) }}
+                    {{ form_widget(edit_form.user, {attr: {class: "form-control"}}) }}
+                </div>
+
+
+                <div class="form-group" >
                     {{ form_errors(edit_form.workers) }}
-                    {{ form_label(edit_form.workers) }}
+                    {{ form_label(edit_form.workers, 'site.workers.label' | trans) }}
                     {{ form_widget(edit_form.workers, {attr: {class: "form-control"}}) }}
                 </div>
 
