@@ -32,7 +32,7 @@ class Site
 
     /**
      * @var Worker[]
-     *
+     * @Groups({"site_read"})
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Worker", inversedBy="sites")
      * @ORM\JoinTable(name="sites_workers",
      *     joinColumns={@ORM\JoinColumn(name="site_id", referencedColumnName="id")},

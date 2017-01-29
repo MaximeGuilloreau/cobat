@@ -24,7 +24,9 @@ var AuthentificationService = function ($q, $log, Restangular, SecurityService, 
 
   api.logout = function () {
     SecurityService.removeConnectedUser();
+    ContextService.removeToken();
   };
+  
   return api;
 };
 

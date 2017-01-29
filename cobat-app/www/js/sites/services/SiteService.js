@@ -19,7 +19,12 @@ angular.module('cobat').factory('sitesService', function (Restangular, $q) {
   };
 
   api.save = function (site) {
-    return $q.when(site);
+
+    if (!!site.id) {
+      return Restangular.one('sites', site.id).customPUT(site);
+    }
+
+    return Restangular.all(sites).post(site);
   };
 
   return api;

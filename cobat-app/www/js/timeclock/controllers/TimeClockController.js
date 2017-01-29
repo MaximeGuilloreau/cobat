@@ -27,7 +27,8 @@ var TimeClockController = function (
   workersService,
   timeclockService,
   sitesService,
-  CalendarService
+  CalendarService,
+  ContextService
   ) {
   var siteId = $stateParams.siteId;
   $scope.title =
@@ -38,8 +39,11 @@ var TimeClockController = function (
 
   $scope.week = [];
 
+
   sitesService.findById(siteId).then(function (site) {
     $scope.site = site;
+    
+    ContextService.setDefaultSite(site.id);
   });
 
   $scope.week = CalendarService.buildRangeDays($scope.startDate, $scope.endDate);

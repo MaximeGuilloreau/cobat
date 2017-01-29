@@ -1,11 +1,14 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div>
+    <div align="center" >
         <img align="center" src="/img/LogoCobatWeb1.jpg"/>
+        <h2>Cobatlist</h2>
     </div>
-    <h2>Welcome Cobat App</h2>
     <p>
-      Message de bienvenu
+      <button type="button" class="button button-positive button-block" ng-click="logout()" >Logout</button>
+      <button ng-if="hasDefaultSite" type="button" class="button button-positive button-block" ng-click="goToTimeClock()" > 
+        Suivi du personnel
+      </button>
     </p>
   </ion-content>
 </ion-view>

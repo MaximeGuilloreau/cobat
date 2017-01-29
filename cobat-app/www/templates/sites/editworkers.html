@@ -1,0 +1,28 @@
+<ion-view view-title="Users">
+    <ion-nav-bar>
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+  <ion-content class="padding">
+    <h1>Liste du personnel</h1>
+    <form ng-submit="updateWorkers(workers)" >
+      <button type="submit" class="button button-positive button-full">
+        Sauvegarder
+      </button>
+      <ul class="list">
+        <li class="item item-toggle" ng-repeat="worker in workers" >
+          {{ worker.firstName+' ' + worker.name }}
+          <label class="toggle toggle-balanced">
+            <input type="checkbox" ng-model="worker.isSelected">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+      </ul>
+      <button type="submit"class="button button-positive button-full" >
+        Sauvegarder
+      </button>
+    </form>
+  </ion-content>
+</ion-view>

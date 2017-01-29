@@ -44,6 +44,29 @@ var CalendarService = function () {
     return week;
   };
 
+  var getEndWeek = function (date) {
+    var day  = date.getDay();
+    var endDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    endDate.setDate(date.getDate() + ( 7 - day));
+    return endDate;
+  };
+  
+  var getStartWeek = function (date) {
+    var day = date.getDay();
+
+    var startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    startDate.setDate(date.getDate()  - (day - 1));
+
+    return startDate;
+  };
+
+  api.getWeekDate = function (date) {
+    return [
+      getStartWeek(date),
+      getEndWeek(date)
+    ];
+  };
+
   return api;
 };
 

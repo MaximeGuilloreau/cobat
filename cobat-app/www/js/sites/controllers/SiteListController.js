@@ -1,5 +1,5 @@
 
-var SitesListController = function ($scope, sitesService, ContextService) {
+var SitesListController = function ($scope, $state, sitesService, ContextService) {
   var now = new Date();
   var user = ContextService.getConnectedUser();
   console.log('user', user);

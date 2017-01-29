@@ -1,6 +1,6 @@
 'use strict';
 
-var SecurityService = function () {
+var SecurityService = function (ContextService) {
   var api = {};
   var connectedUser;
 
@@ -15,6 +15,10 @@ var SecurityService = function () {
 
   api.removeConnectedUser = function () {
     connectedUser = null;
+  };
+
+  api.logout = function () {
+    ContextService.removeToken();
   };
 
   return api;

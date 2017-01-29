@@ -3,12 +3,22 @@
     <h2 align="center">Choisisser votre chantier </h2>
     <ion-list>
       <ion-item
-        class="item-remove-animate"
+        class="item item-remove-animate item-button-right"
         ng-repeat="site in sites"
         type="item-text-wrap"
         ui-sref="sites.calendar({siteId: site.id, month: month, year: year})"
         >
-        <h2>{{site.name}}</h2>
+        <h2>
+          {{site.name}} 
+        </h2>
+          <button 
+            type="button" 
+            ng-click="$event.stopPropagation()"
+            ui-sref="sites.editworker({siteId: site.id})"
+            class="button button-positive button-small" >
+            <i class="icon ion-person-stalker" align="center" ></i>
+          </button>
+
       </ion-item>
     </ion-list>
   </ion-content>

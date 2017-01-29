@@ -6,7 +6,8 @@ var CalendarController = function (
   $scope,
   $stateParams,
   $state,
-  CalendarService
+  CalendarService,
+  ContextService
 ) {
 
   var month = parseInt($stateParams.month, 10);
@@ -16,6 +17,7 @@ var CalendarController = function (
   $scope.dates = [];
   $scope.i = 0;
   $scope.siteId = $stateParams.siteId;
+  ContextService.setDefaultSite($scope.siteId);
   $scope.date = date;
   $scope.dates = CalendarService.buildWeekList(date);
 

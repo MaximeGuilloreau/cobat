@@ -55,7 +55,7 @@ class User implements UserInterface
      * @ORM\Column(type="array")
      * @Groups({"user_write", "user_read"})
      */
-    protected $roles;
+    protected $roles = ['ROLE_USER'];
 
     public function getId()
     {

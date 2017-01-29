@@ -49,5 +49,13 @@ angular.module('cobat').config(function ($stateProvider) {
         controller: 'TimeClockCtrl'
       }
     }
+  }).state('sites.editworker', {
+    url: '/edit-workers/:siteId',
+    views: {
+      'tab-sites': {
+        templateUrl: 'templates/sites/editworkers.html',
+        controller: 'EditWorkerCtrl'
+      }
+    }
   });
 });
