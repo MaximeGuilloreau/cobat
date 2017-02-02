@@ -18,7 +18,6 @@ var ContextService = function (store, jwtHelper) {
     return !!api.getDefaultSite();
   }
 
-
   api.setToken = function (token) {
     store.set('token', token);
   };
@@ -28,11 +27,16 @@ var ContextService = function (store, jwtHelper) {
   };
 
   api.getConnectedUser = function () {
-    
+
+    if (api.isTokenExpired()) {
+      connectedUser = null;
+      api.removeToken();
+    }
+
     if (!!connectedUser) {
       return connectedUser;
     }
-    
+
     var token = store.get('token');
     if (token) {
       return jwtHelper.decodeToken(token);
@@ -42,6 +46,11 @@ var ContextService = function (store, jwtHelper) {
 
   api.removeToken = function () {
     store.remove('token'  );
+  };
+
+  api.isTokenExpired = function() {
+    var token = api.getToken();
+    return jwtHelper.isTokenExpired(token);
   };
 
   return api;

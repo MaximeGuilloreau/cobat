@@ -9,14 +9,14 @@
         ui-sref="sites.calendar({siteId: site.id, month: month, year: year})"
         >
         <h2>
-          {{site.name}} 
+          {{site.name}}
         </h2>
-          <button 
-            type="button" 
+          <button
+            type="button"
             ng-click="$event.stopPropagation()"
             ui-sref="sites.editworker({siteId: site.id})"
-            class="button button-positive button-small" >
-            <i class="icon ion-person-stalker" align="center" ></i>
+            class="button button-positive" >
+            <i class="icon ion-person-add" align="center" ></i>
           </button>
 
       </ion-item>

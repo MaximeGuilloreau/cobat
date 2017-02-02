@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -57,6 +58,19 @@ class User implements UserInterface
      */
     protected $roles = ['ROLE_USER'];
 
+    /**
+     * @var Site[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Site", mappedBy="user", cascade={"persist"})
+     *
+     */
+    protected $sites;
+
+    public function __construct()
+    {
+        $this->sites = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -84,11 +98,6 @@ class User implements UserInterface
             // see section on salt below
             // $this->salt
             ) = unserialize($serialized);
-    }
-
-    public function __construct()
-    {
-        $this->roles = [];
     }
 
     /**
@@ -190,5 +199,45 @@ class User implements UserInterface
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return Site[]
+     */
+    public function getSites()
+    {
+        return $this->sites;
+    }
+
+    /**
+     * @param Site[] $sites
+     */
+    public function setSites($sites)
+    {
+        dump($sites);
+        foreach ($this->sites as $site) {
+            $this->removeSite($site);
+        }
+
+        $this->sites = [];
+        foreach ($sites as $site) {
+            $this->addSite($site);
+        }
+    }
+
+    /**
+     * @param Site $site
+     */
+    public function addSite(Site $site)
+    {
+        $site->setUser($this);
+        $this->sites[] = $site;
+    }
+
+    public function removeSite(Site $site)
+    {
+        dump($site);
+        $site->setUser(null);
+        $this->sites->removeElement($site);
     }
 }

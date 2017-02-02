@@ -3,6 +3,10 @@ view-title="Chantier"
 on-swipe-left="onSwipeLeft()"
 on-swipe-right="onSwipeRight()"
 >
+  <ion-nav-bar>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
   <ion-content class="padding" scroll="false">
     <h2 align="center" >Semaine du mois de {{ ::(date | date: 'MMMM') }}</h2>
     <ion-list>

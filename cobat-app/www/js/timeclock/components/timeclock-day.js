@@ -1,10 +1,17 @@
 'use strict';
-//TODO: put this in factory
+
+var getDefaultHour = function (date) {
+  var defaultHourAmout = [0, 8, 8, 8, 8, 8, 7];
+  var day = date.getDay();
+
+  return defaultHourAmout[day];
+};
+
 var initTime = function (workerId, day) {
   return {
     date: day,
     worker: '/api/workers' + workerId,
-    amountHour: 7,
+    amountHour: getDefaultHour(day),
   };
 };
 

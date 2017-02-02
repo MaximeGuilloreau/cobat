@@ -27,7 +27,7 @@ angular.module('cobat').component('usersTimeclockWeek', {
       worker: ctrl.worker,
       times: weekReport
     });
-
+    console.log('report', weekReport);
     ctrl.weekReport = weekReport;
   },
   bindings: {

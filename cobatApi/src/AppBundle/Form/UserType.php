@@ -2,8 +2,11 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -19,7 +22,13 @@ class UserType extends AbstractType
         $builder
             ->add('email')
             ->add('username')
-            ->add('password');
+            ->add('password')
+            ->add('sites', EntityType::class, [
+                'required' => false,
+                'class' => 'AppBundle:Site',
+                'choice_label' => 'name',
+                'multiple' => true,
+            ]);
     }
 
     /**

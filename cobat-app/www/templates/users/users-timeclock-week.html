@@ -10,15 +10,3 @@
     ></timeclock-day>
   </div>
 </div>
-<div class="row" >
-  <div class="col col-25 cell" >
-    {{ $ctrl.worker.firstName }} {{ $ctrl.worker.name }}
-  </div>
-  <div class="col cell" ng-repeat="day in $ctrl.weekReport" >
-    <timeclock-day
-      date="day"
-      times="$ctrl.weekReport"
-      worker="$ctrl.worker"
-    ></timeclock-day>
-  </div>
-</div>

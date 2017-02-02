@@ -86,6 +86,10 @@ class UserController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+//            foreach ($user->getSi)
+            foreach ($user->getSites() as $site) {
+                $site->setUser($user);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));

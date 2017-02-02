@@ -49,8 +49,11 @@ var TimeClockController = function (
   $scope.week = CalendarService.buildRangeDays($scope.startDate, $scope.endDate);
 
   // Load user times
-  timeclockService.getWeek($stateParams.siteId, $stateParams.startDate, $stateParams.endDate).then(function (week) {
+  timeclockService.getWeek($stateParams.siteId, $stateParams.startDate, $stateParams.endDate)
+  .then(function (week) {
+    console.log('woker list', week);
     $scope.workers = week;
+    console.log($scope.workers);
   });
 
   // save all times
