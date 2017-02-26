@@ -32,7 +32,7 @@ class ExportController extends Controller
 
         return $this
             ->get('cobat.export.excel_builder')
-            ->exportFile($header, $reports);
+            ->exportFile($header, $reports, $now->format('F Y'));
 
     }
 }

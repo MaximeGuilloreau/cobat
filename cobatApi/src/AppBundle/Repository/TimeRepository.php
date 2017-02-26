@@ -22,9 +22,11 @@ class TimeRepository extends EntityRepository
             ->select('t')
             ->from($this->_entityName, 't')
             ->join('t.worker', 'w')
+            ->join('t.site', 's')
             ->addSelect('w')
             ->where('t.date >= :dateStart')
             ->andWhere('t.date < :dateEnd')
+            ->groupBy('t.site', 't.id')
             ->setParameter('dateStart', $dateStart)
             ->setParameter('dateEnd', $dateEnd)
             ;

@@ -33,6 +33,13 @@ services:
         class: AppBundle\Export\ExcelExport
         arguments:
             - '@phpexcel'
+            - '@cobat.export.excel_report_builder'
+            - '@cobat.export.excel_header_builder'
+    cobat.export.excel_header_builder:
+        class: AppBundle\Export\ExcelHeaderBuilder
+
+    cobat.export.excel_report_builder:
+        class: AppBundle\Export\ExcelReportBuilder
 
     cobat.week.builder:
         class: AppBundle\Week\WeekBuilder

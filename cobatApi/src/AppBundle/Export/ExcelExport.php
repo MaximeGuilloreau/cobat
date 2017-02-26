@@ -17,9 +17,21 @@ class ExcelExport
      */
     private $phpExcel;
 
-    public function __construct(Factory $phpExcel)
-    {
+    /** @var ExcelReportBuilder */
+    private $excelReportBuilder;
+
+    /** @var ExcelHeaderBuilder */
+    private $excelHeaderBuilder;
+
+    public function __construct(
+        Factory $phpExcel,
+        ExcelReportBuilder $excelReportBuilder,
+        ExcelHeaderBuilder $excelHeaderBuilder
+    ) {
         $this->phpExcel = $phpExcel;
+        $this->excelReportBuilder = $excelReportBuilder;
+        $this->excelHeaderBuilder = $excelHeaderBuilder;
+
     }
 
     public function exportFile($header, $reports, $title = '')
@@ -29,90 +41,28 @@ class ExcelExport
         $sheet = $phpExcelObject
             ->setActiveSheetIndex(0);
 
-        $maxColumns = count($header);
-        $row = 1;
-        $sheet->mergeCellsByColumnAndRow(0, $row, $maxColumns, $row);
-        $cell = $sheet->setCellValueByColumnAndRow(0, 1, $title, true);
-        $this->addStyleToCell($cell, $phpExcelObject);
-        //$sheet->mergeCellsByColumnAndRow(0, 2, $maxColumns, 3);
+        $this->buildTitle($sheet, $phpExcelObject, $title, count($header) + 3);
+        $this->excelHeaderBuilder->build($phpExcelObject, $header);
 
-        $row = 2;
-        $columns = 0;
-        foreach ($header as $value) {
-            if ($columns < 3) {
-                $sheet->mergeCellsByColumnAndRow($columns, $row, $columns, $row + 1);
-                $cell = $sheet->setCellValueByColumnAndRow($columns, $row, $value, true);
-                $this->addStyleToCell($cell, $phpExcelObject);
+        $this->excelReportBuilder->build($phpExcelObject, $reports);
+//        $cell = $sheet->setCellValueByColumnAndRow(++$columns, $row, 'cumul heures normales (hors samedi)', true);
+//        $cell = $sheet->setCellValueByColumnAndRow(++$columns, $row, 'nombre de samedis', true);
 
-            } else {
-                $cell = $sheet
-                    ->setCellValueByColumnAndRow($columns, $row, self::$days[$value->format('N') - 1], true);
-                $this->addStyleToCell($cell, $phpExcelObject);
-                $cell = $sheet
-                    ->setCellValueByColumnAndRow($columns, $row + 1, $value->format('d'), true);
-                $this->addStyleToCell($cell, $phpExcelObject);
-
-            }
-
-
-            $columns++;
-        }
-
-        ++$row;
-        ++$row;
-        foreach ($reports as $report) {
-            $columns = 0;
-            $sheet
-                ->setCellValueByColumnAndRow($columns, $row, $report['name'])
-                ->setCellValueByColumnAndRow(++$columns, $row, $report['firstname'])
-                ->setCellValueByColumnAndRow(++$columns, $row, $report['site']);
-
-            foreach ($report['times'] as $time) {
-                $cell = $sheet
-                    ->setCellValueByColumnAndRow(++$columns, $row, $time['amount'], true);
-                if (0 === (int)$time['amount']) {
-                    $phpExcelObject->getActiveSheet()->getStyle($cell->getCoordinate())->applyFromArray(
-                        array(
-                            'fill' => array(
-                                'type' => \PHPExcel_Style_Fill::FILL_SOLID,
-                                'color' => array('rgb' => 'E05CC2')
-                            )
-                        )
-
-                    );
-                }
-
-                $phpExcelObject->getActiveSheet()->getStyle($cell->getCoordinate())->applyFromArray(
-                    array(
-                        'borders' => array(
-                            'allborders' => array(
-                                'style' => \PHPExcel_Style_Border::BORDER_THIN
-                            )
-                        )
-                    )
-
-                );
-            }
-
-            $sheet
-                ->setCellValueByColumnAndRow(++$columns, $row, $report['totalHour'], true);
-
-            $row++;
-        }
-
-//        $styleArray = array(
-//            'borders' => array(
-//                'allborders' => array(
-//                    'style' => \PHPExcel_Style_Border::BORDER_THIN
-//                )
-//            )
-//        );
-//        $phpExcelObject->getDefaultStyle()->applyFromArray($styleArray);
         $phpExcelObject->getActiveSheet()->setTitle('Simple');
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $phpExcelObject->setActiveSheetIndex(0);
 
         return $this->writeFile($phpExcelObject);
+    }
+
+
+
+    private function buildTitle($sheet, $phpExcelObject, string $title, $titleSize)
+    {
+        $row = 1;
+        $sheet->mergeCellsByColumnAndRow(0, $row, $titleSize, $row);
+        $cell = $sheet->setCellValueByColumnAndRow(0, $row, $title, true);
+        $this->addStyleToCell($cell, $phpExcelObject);
     }
 
 
@@ -128,6 +78,12 @@ class ExcelExport
             ->setTitle('Export de temps');
     }
 
+    private function getFileName()
+    {
+        $now = new \DateTime();
+        return sprintf('suivi-du-personnel-au-%s.xls', $now->format('Ymd-H:i'));
+    }
+
     private function writeFile(\PHPExcel $phpExcelObject)
     {
         // create the writer
@@ -137,7 +93,7 @@ class ExcelExport
         // adding headers
         $dispositionHeader = $response->headers->makeDisposition(
             ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            'rapport.xls'
+            $this->getFileName()
         );
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
         $response->headers->set('Pragma', 'public');
@@ -150,14 +106,18 @@ class ExcelExport
     private function addStyleToCell(\PHPExcel_Cell $cell, $phpExcelObject)
     {
         $phpExcelObject->getActiveSheet()->getStyle($cell->getCoordinate())->applyFromArray(
-            array(
-                'borders' => array(
-                    'allborders' => array(
-                        'style' => \PHPExcel_Style_Border::BORDER_THIN
-                    )
-                )
-            )
+            [
+                'borders' => [
+                    'allborders' => [
+                        'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                    ],
+                ],
+                'alignment' => [
+                    'horizontal'=> \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                ],
+            ]
 
         );
+
     }
 }

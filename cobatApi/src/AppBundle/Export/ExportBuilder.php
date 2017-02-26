@@ -112,9 +112,10 @@ class ExportBuilder
                 $data[$time->getWorker()->getId()] = [
                     'name' => $time->getWorker()->getName(),
                     'firstname' => $time->getWorker()->getFirstName(),
-                    'site' => 'site',
+                    'site' => $time->getSite()->getName(),
                     'times' => [],
                     'totalHour' => 0,
+                    'nbSaturday' => 0,
                 ];
             }
 
@@ -124,9 +125,19 @@ class ExportBuilder
             ];
 
             $data[$time->getWorker()->getId()]['totalHour'] += $time->getAmountHour();
+            $data[$time->getWorker()->getId()]['nbSaturday'] += $this->calculateNbSaturday($time);
         }
 
         return $data;
+    }
+
+    private function calculateNbSaturday(Time $time)
+    {
+        if ((int) $time->getDate()->format('w') === 6 && $time->getAmountHour() > 0) {
+            return 1;
+        }
+
+        return 0;
     }
 
     private function computeMissingDays($workerReports, $rangeDays)
